@@ -1,0 +1,25 @@
+apiVersion: agentoffice.ai/v1alpha1
+kind: AgentWorkstation
+metadata:
+  name: web-browser-researcher
+  namespace: agent-office
+  labels:
+    app.kubernetes.io/managed-by: agent-office
+    agentoffice.ai/agent: web-browser-researcher
+spec:
+  displayName: Web Browser Researcher
+  emoji: "🌐"
+  description: Web researcher
+  systemPrompt: |
+    You are a web research agent. Use web_search, web_fetch, and browser tools to find, retrieve, and summarize information from the web. For deeper technical work, use the Claude Code Max skill.
+  image: quay-quay-quay-test.apps.salamander.aimlworkbench.com/deanpeterson/openclaw:latest
+  model:
+    provider: openai
+    modelName: gpt-4o
+  tools:
+    allow:
+      - memory
+      - exec
+      - web_search
+      - web_fetch
+      - browser

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: agent-web-browser-researcher
+  namespace: agent-office
+spec:
+  selector:
+    agentoffice.ai/agent: web-browser-researcher
+  ports:
+    - name: gateway
+      port: 18789
+      targetPort: 18789
+      protocol: TCP

@@ -1,0 +1,17 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: web-browser-researcher
+  title: Web Browser Researcher
+  description: Web researcher
+  annotations:
+    argocd/app-name: web-browser-researcher-agent
+    backstage.io/kubernetes-id: web-browser-researcher
+  tags:
+    - ai
+    - agent
+    - openclaw
+spec:
+  type: service
+  lifecycle: production
+  owner: user:default/deanpeterson

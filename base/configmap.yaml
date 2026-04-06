@@ -34,6 +34,11 @@ data:
       "tools": {
         "allow": ["exec", "claude_code_resume", "claude_code_sessions", "group:plugins"]
       },
+      "channels": {
+        "discord": {
+          "enabled": true
+        }
+      },
       "commands": {
         "native": "auto",
         "nativeSkills": "auto",

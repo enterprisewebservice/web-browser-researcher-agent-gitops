@@ -36,7 +36,17 @@ data:
       },
       "channels": {
         "discord": {
-          "enabled": true
+          "enabled": true,
+          "token": {
+            "source": "env",
+            "provider": "default",
+            "id": "DISCORD_BOT_TOKEN"
+          },
+          "groupPolicy": "open",
+          "dm": {
+            "policy": "open",
+            "allowFrom": ["*"]
+          }
         }
       },
       "commands": {

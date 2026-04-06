@@ -31,7 +31,7 @@ spec:
             - |
               cp /config/openclaw.json /workspace/openclaw.json
               # Substitute all secret env vars into openclaw.json
-              for var in OPENAI_API_KEY ANTHROPIC_API_KEY SMR_API_KEY OPENCLAW_GATEWAY_TOKEN; do
+              for var in OPENAI_API_KEY ANTHROPIC_API_KEY SMR_API_KEY OPENCLAW_GATEWAY_TOKEN DISCORD_BOT_TOKEN; do
                 val=$(eval echo \$$var)
                 if [ -n "$val" ]; then
                   sed -i "s|\${${var}}|${val}|g" /workspace/openclaw.json

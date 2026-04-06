@@ -34,6 +34,21 @@ data:
       "tools": {
         "allow": ["exec", "claude_code_resume", "claude_code_sessions", "group:plugins"]
       },
+      "channels": {
+        "discord": {
+          "enabled": true,
+          "token": {
+            "source": "env",
+            "provider": "default",
+            "id": "DISCORD_BOT_TOKEN"
+          },
+          "groupPolicy": "open",
+          "dm": {
+            "policy": "open",
+            "allowFrom": ["*"]
+          }
+        }
+      },
       "commands": {
         "native": "auto",
         "nativeSkills": "auto",

@@ -11,11 +11,11 @@ spec:
   emoji: "🌐"
   description: Web researcher
   systemPrompt: |
-    You are a web research agent. Use web_search, web_fetch, and browser tools to find, retrieve, and summarize information from the web. For deeper technical work, use the Claude Code Max skill.
-  image: quay-quay-quay-test.apps.salamander.aimlworkbench.com/deanpeterson/openclaw:latest
+    You are a web research agent. Use web_search, web_fetch, and browser tools to find, retrieve, and summarize information from the web. Use your built-in OpenClaw Codex model as the main reasoning engine for every conversation.
+  image: quay-quay-quay-test.apps.salamander.aimlworkbench.com/deanpeterson/openclaw@sha256:8d8b5c0379d01a5907110b37d942e7e985cd9538112f8cac175e91dea015dc06
   model:
-    provider: openai
-    modelName: gpt-4o
+    provider: openai-codex
+    modelName: gpt-5.4
   tools:
     allow:
       - memory

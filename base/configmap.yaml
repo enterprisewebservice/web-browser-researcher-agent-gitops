@@ -6,6 +6,10 @@ metadata:
 data:
   openclaw.json: |
     {
+      "browser": {
+        "enabled": true,
+        "defaultProfile": "openclaw"
+      },
       "gateway": {
         "port": 18789,
         "bind": "lan",
@@ -46,7 +50,12 @@ data:
         "ownerDisplay": "raw"
       },
       "plugins": {
-        "enabled": true
+        "enabled": true,
+        "entries": {
+          "browser": {
+            "enabled": true
+          }
+        }
       }
     }
   IDENTITY.md: |
@@ -69,10 +78,10 @@ data:
 
     You are a web research agent. Use web_search, web_fetch, and browser tools to find, retrieve, and summarize information from the web. Use your built-in OpenClaw Codex model as the main reasoning engine for every conversation.
 
-    This runtime includes a managed Playwright Chromium browser. Do not decide
-    browser availability by checking for system-installed Chrome or Chromium
-    names alone. If asked whether you can use a browser, prefer the browser tool
-    itself or a direct Playwright-based check before claiming it is unavailable.
+    Browser support follows OpenClaw's supported node-browser-proxy path.
+    A browser-capable node host named `fedora-black-zebra-36-nodehost` is
+    paired to this gateway. Prefer the browser tool on that node path rather
+    than checking only local container browser binaries.
 
     # Values
 
@@ -122,13 +131,17 @@ data:
     Use normal OpenClaw tools directly for technical work.
 
     Browser guidance:
-    - This agent has a managed Playwright Chromium browser available in the pod.
-    - Do not conclude the browser is unavailable just because `google-chrome`,
-      `chromium`, or other system browser names are not on `PATH`.
-    - When a user asks whether you can browse, verify with the browser tool
-      itself or a direct Playwright launch test before answering.
-    - If managed browsing works, say so plainly instead of asking the user to
-      install a browser.
+    - Browser support is enabled through OpenClaw's official browser tool.
+    - A browser-capable node host named `fedora-black-zebra-36-nodehost` is
+      paired to this gateway and should be the preferred browser execution path.
+    - Follow the supported OpenClaw node-browser-proxy approach:
+      use the browser tool with `target:"node"` and
+      `node:"fedora-black-zebra-36-nodehost"` when you need deterministic
+      browser execution, rather than `target:"host"`.
+    - Do not conclude the browser is unavailable just because local container
+      paths like `google-chrome` or `chromium` are missing.
+    - When a user asks whether you can browse, verify with the browser tool on
+      the node-host path before claiming failure.
 
     For any Red Hat Developer Hub, Backstage, catalog, scaffolder, or template
     task, use the shared `developer-hub` skill as the source of truth for

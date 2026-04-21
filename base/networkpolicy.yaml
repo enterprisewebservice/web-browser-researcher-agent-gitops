@@ -10,12 +10,19 @@ spec:
   policyTypes:
     - Egress
   egress:
-    # DNS
+    # DNS — OpenShift CoreDNS pods listen on 5353 internally (the Service
+    # maps 53 -> named targetPort 'dns'/5353). NetworkPolicy ports match
+    # the pod port, not the service port, so we must allow 5353. Port 53
+    # is kept in case any future DNS pod exposes it directly.
     - to:
         - namespaceSelector:
             matchLabels:
               kubernetes.io/metadata.name: openshift-dns
       ports:
+        - port: 5353
+          protocol: UDP
+        - port: 5353
+          protocol: TCP
         - port: 53
           protocol: UDP
         - port: 53

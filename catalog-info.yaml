@@ -1,9 +1,25 @@
 apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: deanpeterson
+  namespace: default
+spec:
+  profile:
+    displayName: Dean Peterson
+    email: deanpeterson@redhat.com
+  memberOf: []
+---
+apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: web-browser-researcher
   title: Web Browser Researcher
   description: Web researcher
+  links:
+    - url: "https://devspaces.apps.salamander.aimlworkbench.com/#https://github.com/enterprisewebservice/web-browser-researcher-agent-gitops"
+      title: "Open in Dev Spaces"
+      icon: catalog
+      type: devspaces
   annotations:
     argocd/app-name: web-browser-researcher-agent
     backstage.io/kubernetes-id: web-browser-researcher

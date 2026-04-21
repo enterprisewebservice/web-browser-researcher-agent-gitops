@@ -1,0 +1,45 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: web-browser-researcher-egress
+  namespace: agent-office
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: web-browser-researcher
+  policyTypes:
+    - Egress
+  egress:
+    # DNS
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: openshift-dns
+      ports:
+        - port: 53
+          protocol: UDP
+        - port: 53
+          protocol: TCP
+    # SSH to the Fedora browser VM (the declared "node host" tool)
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: default
+          podSelector:
+            matchLabels:
+              kubevirt.io/domain: fedora-black-zebra-36
+      ports:
+        - port: 22
+          protocol: TCP
+    # External HTTPS (OpenAI, Discord, etc.). Private ranges excluded so
+    # in-cluster destinations are only reachable via the specific rules above.
+    - to:
+        - ipBlock:
+            cidr: 0.0.0.0/0
+            except:
+              - 10.0.0.0/8
+              - 172.16.0.0/12
+              - 192.168.0.0/16
+      ports:
+        - port: 443
+          protocol: TCP

@@ -1,10 +1,12 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-commonLabels:
-  app.kubernetes.io/name: web-browser-researcher
-  app.kubernetes.io/managed-by: agent-office
-  agentoffice.ai/agent: web-browser-researcher
-  backstage.io/kubernetes-id: web-browser-researcher
+labels:
+  - pairs:
+      app.kubernetes.io/name: web-browser-researcher
+      app.kubernetes.io/managed-by: agent-office
+      agentoffice.ai/agent: web-browser-researcher
+      backstage.io/kubernetes-id: web-browser-researcher
+    includeSelectors: false
 resources:
   - agentworkstation.yaml
   - configmap.yaml
@@ -12,3 +14,4 @@ resources:
   - deployment.yaml
   - service.yaml
   - route.yaml
+  - networkpolicy.yaml
